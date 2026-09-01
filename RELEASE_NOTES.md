@@ -1,13 +1,13 @@
-# v1.0.0
+# v1.1.0
 
-Initial release of Army Men RTS – Improved Building Placement.
+This release adds a double-click installation and uninstallation workflow. The binary patch itself is unchanged from v1.0.0.
 
-- Allows construction directly beside buildings, walls, and blocked map edges when only the extra spacing rule applies.
-- Keeps actual footprint overlap blocked.
+- Added `Install Mod.cmd`: place the release files beside `amrts.exe` and double-click it.
+- Added `Uninstall Mod.cmd`: double-click it to restore the verified backup.
+- The launchers keep the window open so the result or error remains visible.
+- The PowerShell execution-policy bypass applies only to the launched process and does not change system settings.
+- SHA-256 verification now uses the built-in .NET implementation and does not depend on PowerShell module autoloading.
+- The original hash checks, byte checks, backup verification, and patched-file verification remain unchanged.
 - Supports the GOG `amrts.exe` with original SHA-256 `34C9CACFCD42A816A5A9E886FBE18AE69CA2B82BDB7ED95588772F3079777B59`.
-- Verifies the original executable and patch bytes before changing the file.
-- Creates and verifies `amrts.exe.backup`.
-- Verifies the complete patched SHA-256 after installation.
-- Restores the verified clean backup with `uninstall.ps1`.
 
 No game files are included in the release.

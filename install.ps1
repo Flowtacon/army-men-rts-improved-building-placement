@@ -16,7 +16,15 @@ $PatchOffset = 0x00184EC7
 function Get-Sha256 {
     param([Parameter(Mandatory)][string] $Path)
 
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToUpperInvariant()
+    $stream = [System.IO.File]::Open($Path, 'Open', 'Read', 'Read')
+    $sha256 = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($sha256.ComputeHash($stream))).Replace('-', '')
+    }
+    finally {
+        $sha256.Dispose()
+        $stream.Dispose()
+    }
 }
 
 function Read-BytesAtOffset {
@@ -169,7 +177,8 @@ try {
     exit 0
 }
 catch {
-    Write-Error $_.Exception.Message
+    Write-Host ''
+    Write-Host ('ERROR: ' + $_.Exception.Message) -ForegroundColor Red
     exit 1
 }
 finally {

@@ -16,20 +16,32 @@ Other executable versions are rejected without modification.
 ## Installation
 
 1. Download and extract the latest release ZIP.
-2. Copy `install.ps1` and `uninstall.ps1` into the directory containing `amrts.exe`.
-3. Open PowerShell in that directory.
-4. Run:
+2. Copy all extracted files into the directory containing `amrts.exe`.
+3. Double-click **`Install Mod.cmd`**.
+4. Read the result and press any key to close the window.
 
-   ```powershell
-   .\install.ps1
-   ```
+Close the game before installing or uninstalling.
 
-The installer verifies the complete executable hash and the original bytes before changing anything. It creates `amrts.exe.backup`, patches a temporary copy, verifies the complete patched hash, and only then replaces `amrts.exe`.
+The launcher starts the installer with a process-only PowerShell execution-policy bypass. It does not change the execution policy saved on the computer. The installer still verifies the complete executable hash and the original bytes before changing anything. It creates `amrts.exe.backup`, patches a temporary copy, verifies the complete patched hash, and only then replaces `amrts.exe`.
 
-If PowerShell blocks local scripts, run:
+If writing to the game directory is denied, right-click `Install Mod.cmd` and select **Run as administrator**.
+
+## Uninstallation
+
+Double-click **`Uninstall Mod.cmd`** in the game directory. The uninstaller verifies both the backup and the current patched executable before restoring the clean file. It keeps the verified backup after restoration.
+
+## Manual and advanced use
+
+The PowerShell scripts remain available for inspection and automation. To install manually, open PowerShell in the game directory and run:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+To uninstall manually:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\uninstall.ps1
 ```
 
 To keep the scripts elsewhere, pass the executable explicitly:
@@ -38,17 +50,7 @@ To keep the scripts elsewhere, pass the executable explicitly:
 .\install.ps1 -ExecutablePath "E:\GOG Galaxy\Games\Army Men RTS\amrts.exe"
 ```
 
-Close the game before installing or uninstalling.
-
-## Uninstallation
-
-Run from the game directory:
-
-```powershell
-.\uninstall.ps1
-```
-
-The uninstaller verifies both the backup and the current patched executable before restoring the clean file. It keeps the verified backup after restoration.
+A broadly trusted Authenticode signature requires a certificate issued by a trusted code-signing authority. A self-signed certificate would require every user to install and trust that certificate, so it is not used here. The readable CMD launchers provide double-click installation without making a permanent security-policy change.
 
 ## Technical details
 
@@ -68,7 +70,7 @@ The original result logic maps `onFoot = 0` to the spacing-only rejection and `o
 
 ## Scope
 
-The scripts do not include or modify `base.x` or `winmm.dll`. They only patch the exact supported `amrts.exe`. This project is not affiliated with or endorsed by the game's publishers or distributors. Use it with a legally obtained copy of the game.
+The release does not include or modify `base.x` or `winmm.dll`. It only patches the exact supported `amrts.exe`. This project is not affiliated with or endorsed by the game's publishers or distributors. Use it with a legally obtained copy of the game.
 
 ## License
 
