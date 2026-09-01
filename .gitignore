@@ -1,0 +1,10 @@
+# Never commit game files or generated release archives.
+*.exe
+*.dll
+*.backup
+*.tmp
+*.zip
+base.x
+
+# Local test output.
+test-results/
