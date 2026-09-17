@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/army-men-rts-title.png" alt="Army Men RTS title screen" width="100%">
+  <img src="docs/images/compact-building-row.png" alt="Army Men RTS title screen" width="100%">
 </p>
 
 The patch removes the artificial spacing-only restriction around buildings, walls, and blocked map edges. Real footprint overlap remains blocked by the original game logic.
